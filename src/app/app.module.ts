@@ -1,16 +1,50 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { CommonModule } from '@angular/common';
+//import { AppRoutingModule } from '../routing/app-routing.module'
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { MaterialModule } from '@angular/material';
+
+
+
+const routes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'team/:userId'}
+];
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyB5n_yyX5h7bLXW0mKs0GzdvUiItWPrmTo",
+    authDomain: "dynasty-contract-ff2.firebaseapp.com",
+    databaseURL: "https://dynasty-contract-ff2.firebaseio.com",
+    projectId: "dynasty-contract-ff2",
+    storageBucket: "dynasty-contract-ff2.appspot.com",
+    messagingSenderId: "250107258935"
+};
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    //AppRoutingModule
+    MaterialModule,
+    CommonModule,
+    RouterModule.forRoot(routes)
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [ AppComponent,
+  HomeComponent,
+  ToolbarComponent ],
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {}
+
+
+
