@@ -9,14 +9,16 @@ import { CommonModule } from '@angular/common';
 //import { AppRoutingModule } from '../routing/app-routing.module'
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { TeamComponent } from './components/team/team.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MaterialModule } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk';
 
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'team/:userId'}
+  {path: 'team/:userId', component: TeamComponent}
 ];
 
 export const firebaseConfig = {
@@ -36,11 +38,13 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     //AppRoutingModule
     MaterialModule,
+    CdkTableModule,
     CommonModule,
     RouterModule.forRoot(routes)
   ],
   declarations: [ AppComponent,
   HomeComponent,
+  TeamComponent,
   ToolbarComponent ],
   bootstrap: [ AppComponent ]
 })

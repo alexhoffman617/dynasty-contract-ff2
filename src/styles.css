@@ -3,6 +3,14 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");
 /*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
 
+td {
+  text-align: left
+}
+
+th {
+  text-align: left
+}
+
 body, html {
   margin: 0;
   font-family: Roboto;

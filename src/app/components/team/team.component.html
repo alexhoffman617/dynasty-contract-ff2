@@ -1,0 +1,32 @@
+<p>
+  <button ng-click="testButton()">Test Button</button>
+</p>
+<p>
+  {{(user| async)?.name }}
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Team</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody class="table-hover">
+        <tr *ngFor="let bid of userBids | async">
+        <td>
+          {{ (bid.playerInfo | async)?.lastName }}
+        </td>
+        <td>
+          {{ (bid.playerInfo | async)?.position }}
+        </td>
+        <td>
+          {{ (bid.playerInfo | async)?.team }}
+        </td>
+        <td>
+          {{ bid.amount }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
