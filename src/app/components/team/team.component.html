@@ -1,21 +1,21 @@
-<p>
-  <button ng-click="testButton()">Test Button</button>
-</p>
-<p>
-  {{(user| async)?.name }}
-  </p>
-  <table>
+<h2 >
+  {{(user | async) != null ? (user | async)?.name + "'s Team": "Invalid Team Link"}}
+  </h2>
+  <table class="md-table">
     <thead>
       <tr>
         <th>Name</th>
         <th>Position</th>
         <th>Team</th>
-        <th>Amount</th>
+        <th>Bye</th>
+        <th>Salary</th>
+        <th>Years</th>
+        <th>Total Value</th>        
       </tr>
     </thead>
-    <tbody class="table-hover">
-        <tr *ngFor="let bid of userBids | async">
-        <td>
+    <tbody class="table-hover" *ngFor="let bid of userBids | async">
+        <tr *ngIf="bid.isWinningBid">
+        <td [routerLink]="['/player', bid.playerId]">
           {{ (bid.playerInfo | async)?.lastName }}
         </td>
         <td>
@@ -25,7 +25,16 @@
           {{ (bid.playerInfo | async)?.team }}
         </td>
         <td>
-          {{ bid.amount }}
+          {{ (bid.playerInfo | async)?.byeWeek }}
+        </td>
+        <td>
+          ${{ bid.salary }}
+        </td>
+        <td>
+          {{ bid.years }}
+        </td>
+        <td>
+          ${{ bid.totalValue }}
         </td>
       </tr>
     </tbody>

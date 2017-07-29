@@ -1,12 +1,13 @@
 
 
-#header-primary-white {
+#header-primary-white, .header-button {
   color: white;
   text-decoration: none;
+  margin-right: 20px;
 }
 
-#header-primary-white:hover {
-  color: teal;
+#header-primary-white:hover,  .header-button:hover{
+  color: teal !important;
   text-decoration: none;
 }
 
@@ -22,4 +23,10 @@
 #custom-avatar {
   height: 28px;
   width: 28px;
+}
+
+.header-button{
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+  font-size: 20px;
 }

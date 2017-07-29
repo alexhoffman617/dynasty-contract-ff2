@@ -1,0 +1,58 @@
+<h2 >
+  {{(player | async) != null ? 
+  (player | async).lastName + ", " + (player | async).firstName 
+  : "Invalid Player Page"}}
+  </h2>
+  <div>
+    {{ currentMaxBid !=null ? 
+    timeService.getTimeLeft(currentMaxBid.time, timeService.currentTimeInt) :
+    "--"}}
+  </div>
+  <div>
+    <md-input-container>
+      <input mdInput placeholder="Salary" [(ngModel)]="newBidSalary" name="newBidSalary"/>
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Years" [(ngModel)]="newBidYears" name="newBidYears"/>
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="TotalValue" disabled="true"
+      [value]="getBidTotalValue(newBidSalary, newBidYears)"/>
+    </md-input-container>
+    <button type="submit" md-raised-button color="primary"  
+      (click)="submitBid(newBidSalary, newBidYears)">
+      BID
+    </button>
+  </div>
+  <table class="md-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Time</th>
+        <th>Amount</th>
+        <th>Years</th>
+        <th>Total Value</th>
+       
+      </tr>
+    </thead>
+    <tbody class="table-hover">
+        <tr *ngFor="let bid of bids | async">
+        <td [routerLink]="['/team', (bid.user | async)?.$key]">
+          {{ (bid.user | async)?.name }}
+        </td>
+        <td>
+          {{ timeService.getLocalTimeFromTimeStamp(bid.time) }}
+        </td>
+        <td>
+          ${{ bid.salary }}
+        </td>
+        <td>
+          {{ bid.years }}
+        </td>
+        <td>
+          ${{ bid.totalValue }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+

@@ -24,18 +24,17 @@ export class TeamComponent implements OnInit {
     var that = this;
     this.route.params.subscribe(params => this.userId = params['userId']);
     this.user = this.afDb.object('/users/'+ this.userId);
-    this.player = that.afDb.object('/players/AntonioBrown');
     this.userBids = this.afDb.list('bids', {
-                query: {
-                    orderByChild: 'user',
-                    equalTo: this.userId
-                }
-            }).map(bids => {
-                return bids.map(bid => {
-                    bid.playerInfo = that.afDb.object('/players/' + bid.player);
-                    return bid;
-                })
-            })
+        query: {
+            orderByChild: 'userId',
+            equalTo: this.userId
+        }
+    }).map(bids => {
+        return bids.map(bid => {
+            bid.playerInfo = that.afDb.object('/players/' + bid.playerId);
+            return bid;
+        })
+    })
   }
 
   testButton(){
