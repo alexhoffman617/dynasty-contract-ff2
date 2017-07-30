@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable  } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable  } from 'angularfire2/database';
 import { ActivatedRoute } from '@angular/router';
 import { Bid } from '../../models/bid';
 import { TimeService } from '../../services/time.service';
@@ -15,15 +15,14 @@ export class PlayerComponent implements OnInit {
   displayBids: object;
   bids;
   playerId: string;
-  player: object;
+  player: FirebaseObjectObservable<object>;
   currentMaxBid: Bid;
   timeService;
   constructor(private afDb: AngularFireDatabase,
   private afAuth: AngularFireAuth,
-  private route: ActivatedRoute,
-  ) {
+  private route: ActivatedRoute) {
     this.timeService = new TimeService();
-   }
+  }
 
   ngOnInit() {
     var that = this;
@@ -57,7 +56,9 @@ export class PlayerComponent implements OnInit {
       }
       this.bids.update(this.currentMaxBid.$key, { isWinningBid: false })
     }
-    this.bids.push(bid);
+    this.bids.push(bid).then((snap) => {
+    this.player.update({ winningBidId: snap.key})
+    });
   }
 
   getBidTotalValue(salary: number, years: number){

@@ -1,3 +1,46 @@
-<p>
-  players-list works!
-</p>
+<table class="md-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Team</th>
+      <th>Owner</th>
+      <th>Time Left</th>
+      <th>Bid Time</th>
+      <th>Salary</th>
+      <th>Years</th>
+      <th>Total Value</th>   
+    </tr>
+  </thead>
+  <tbody class="table-hover">
+      <tr *ngFor="let player of players | async">
+      <td [routerLink]="['/player', player.$key]">
+        {{ player.lastName }}
+      </td>
+      <td>
+        {{ player.position }}
+      </td>
+      <td>
+        {{ player.team }}
+      </td>
+      <td>
+        {{ (getWinningBidUser((getWinningBid(player.winningBidId) | async)?.userId) | async)?.name}} 
+      </td>
+      <td>
+        {{ timeService.getTimeLeft((getWinningBid(player.winningBidId) | async)?.time, timeService.currentTimeInt) }}
+      </td>
+      <td>
+        {{ timeService.getLocalTimeFromTimeStamp((getWinningBid(player.winningBidId) | async)?.time) }}
+      </td>
+      <td>
+        {{ (getWinningBid(player.winningBidId) | async)?.salary }}
+      </td>
+      <td>
+        {{ (getWinningBid(player.winningBidId) | async)?.years }}
+      </td>
+      <td>
+        {{ (getWinningBid(player.winningBidId) | async)?.totalValue }}
+      </td>
+     </tr>
+  </tbody>
+</table>
