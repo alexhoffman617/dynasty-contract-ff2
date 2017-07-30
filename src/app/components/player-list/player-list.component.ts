@@ -1,8 +1,9 @@
 import { Component, OnInit,  } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable  } from 'angularfire2/database';
-import { TimeService } from '../../services/time.service';
 import { Bid } from '../../models/bid'
+import { TimeService } from '../../services/time.service';
+
 
 
 @Component({
@@ -13,10 +14,8 @@ import { Bid } from '../../models/bid'
 export class PlayerListComponent implements OnInit {
   players: FirebaseListObservable<object>;
   bids;
-  timeService: TimeService;
   constructor(private afDb: AngularFireDatabase,
-  private afAuth: AngularFireAuth) {
-    this.timeService = new TimeService();
+  private afAuth: AngularFireAuth, private timeService: TimeService) {
    }
 
   ngOnInit() {

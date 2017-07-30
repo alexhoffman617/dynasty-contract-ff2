@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { ActivatedRoute } from '@angular/router';
+import { SalaryService } from '../../services/salary.service'
 import 'rxjs/add/operator/map'; 
 
 
@@ -16,14 +17,13 @@ export class TeamComponent implements OnInit {
   userBids: object;
   player: object;
   constructor(private afDb: AngularFireDatabase,
-      private route: ActivatedRoute) {
-    
+      private route: ActivatedRoute,
+      private salaryService: SalaryService) {
    }
 
   ngOnInit() {
     var that = this;
     this.route.params.subscribe(params => this.userId = params['userId']);
-    this.user = this.afDb.object('/users/'+ this.userId);
     this.userBids = this.afDb.list('bids', {
         query: {
             orderByChild: 'userId',
@@ -35,10 +35,7 @@ export class TeamComponent implements OnInit {
             return bid;
         })
     })
-  }
-
-  testButton(){
-    var x = this.userBids
+    this.salaryService.setServiceForUser(this.userId);
   }
 
 }

@@ -3,14 +3,14 @@
   <button class="header-button" [routerLink]="['/playerList']" md-icon-button>
     Players
   </button>
-  <button *ngIf="user" class="header-button" [routerLink]="['/team', user.uid]" md-icon-button>
+  <button *ngIf="loginService.user" class="header-button" [routerLink]="['/team', loginService.user.uid]" md-icon-button>
     My Team
   </button>
   <span class="spacer"></span>
-  <button *ngIf="user" class="header-button" md-icon-button (click)="logout()">
-    <img class="mat-card-avatar" id="custom-avatar" src="{{user.photoURL}}">
+  <button *ngIf="loginService.user" class="header-button" md-icon-button (click)="loginService.logout()">
+    <img class="mat-card-avatar" id="custom-avatar" src="{{loginService.user.photoURL}}">
   </button>
-  <button md-button *ngIf="!user" class="header-button" (click)="login()">
+  <button md-button *ngIf="!loginService.user" class="header-button" (click)="loginService.login()">
     LOGIN
   </button>
 </md-toolbar>

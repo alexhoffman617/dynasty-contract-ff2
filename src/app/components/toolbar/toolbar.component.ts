@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -15,26 +16,11 @@ export class ToolbarComponent implements OnInit {
   darkModeClass = 'app-dark-theme';
 
   constructor(private afAuth: AngularFireAuth,
-    private router: Router) { }
-
-  login() {
-      this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    }
-
-  logout() {
-    this.afAuth.auth.signOut();
-    this.router.navigateByUrl('');
-  }
+    private router: Router,
+    private loginService: LoginService) { }
 
   ngOnInit() {
     this.checkDarkMode();
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        this.user = user;
-      } else {
-        this.user = null;
-      }
-    });
   }
 
   checkDarkMode() {
