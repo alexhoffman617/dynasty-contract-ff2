@@ -1,6 +1,6 @@
 import { Component, OnInit,  } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable  } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable  } from 'angularfire2/database';
 import { Bid } from '../../models/bid'
 import { TimeService } from '../../services/time.service';
 
@@ -15,7 +15,7 @@ export class PlayerListComponent implements OnInit {
   players: FirebaseListObservable<object>;
   bids;
   constructor(private afDb: AngularFireDatabase,
-  private afAuth: AngularFireAuth, private timeService: TimeService) {
+  private afAuth: AngularFireAuth, public timeService: TimeService) {
    }
 
   ngOnInit() {
@@ -32,10 +32,20 @@ export class PlayerListComponent implements OnInit {
   }
 
   getWinningBid(winningBidId){
+    if(!winningBidId){
+      var x = new FirebaseObjectObservable
+      x.set({"salary": "--", "years": "--", "totalValue":"--", "userId": null})
+      return x;
+    }
     return this.afDb.object('/bids/' + winningBidId);
   }
 
   getWinningBidUser(userId){
+    if(!userId){
+      var x = new FirebaseObjectObservable
+      x.set( { "name": "--"});
+      return x;
+    }
     return this.afDb.object('/users/' + userId);
   }
 

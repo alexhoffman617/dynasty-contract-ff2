@@ -25,9 +25,9 @@ export class PlayerComponent implements OnInit {
   constructor(private afDb: AngularFireDatabase,
   private afAuth: AngularFireAuth,
   private route: ActivatedRoute,
-  private timeService: TimeService,
-  private salarySerivce: SalaryService,
-  private loginService: LoginService,
+  public timeService: TimeService,
+  public salarySerivce: SalaryService,
+  public loginService: LoginService,
   public snackBar: MdSnackBar
   ) {
   }
@@ -59,7 +59,7 @@ export class PlayerComponent implements OnInit {
 
   submitBid(salary: number, years: number){
     var bid = new Bid(true, this.playerId, salary, years, this.getBidTotalValue(salary, years),
-     "O5HzEpN5RrM3rUjLIp3eJUFdlxF3", firebase.database.ServerValue.TIMESTAMP);
+     this.loginService.userInDb.$key, firebase.database.ServerValue.TIMESTAMP);
     this.validateAndUpdateBid(bid);
 
   }

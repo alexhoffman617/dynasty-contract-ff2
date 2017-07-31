@@ -17,7 +17,7 @@ export class ToolbarComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router,
-    private loginService: LoginService) { }
+    public loginService: LoginService) { }
 
   ngOnInit() {
     this.checkDarkMode();

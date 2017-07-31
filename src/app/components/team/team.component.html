@@ -1,8 +1,14 @@
 <h2 >
-  {{(user | async) != null ? (user | async)?.name + "'s Team": "Invalid Team Link"}}
+  {{ loginService.userInDb != null ? loginService.userInDb?.name + "'s Team": "Invalid Team Link" }}
   </h2>
   <div>
-    {{ salaryService.totalSalary }} : {{ salaryService.winningPlayers }} : {{ salaryService.getMaxBid((user | async)?.deadSalary) }}
+    Total Salary: {{ salaryService.totalSalary }}
+  </div>
+  <div>
+     Current Player Count: {{ salaryService.winningPlayers }}
+  </div>
+  <div>
+    Current Max Bid: {{ salaryService.getMaxBid(loginService.userInDb?.deadSalary) }}
   </div>
   <table class="md-table">
     <thead>

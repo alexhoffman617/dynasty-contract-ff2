@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { ActivatedRoute } from '@angular/router';
-import { SalaryService } from '../../services/salary.service'
+import { SalaryService } from '../../services/salary.service';
+import { LoginService } from '../../services/login.service';
 import 'rxjs/add/operator/map'; 
 
 
@@ -13,12 +14,12 @@ import 'rxjs/add/operator/map';
 })
 export class TeamComponent implements OnInit {
   userId: string;
-  user: object;
   userBids: object;
   player: object;
   constructor(private afDb: AngularFireDatabase,
       private route: ActivatedRoute,
-      private salaryService: SalaryService) {
+      public salaryService: SalaryService,
+      public loginService: LoginService) {
    }
 
   ngOnInit() {
