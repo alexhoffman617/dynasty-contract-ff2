@@ -103,7 +103,7 @@ export class PlayerComponent implements OnInit {
     }
 
     this.bids.push(bid).then((snap) => {
-    this.player.update({ winningBidId: snap.key})
+      this.player.update({ winningBidId: snap.key})
     });
   }
 

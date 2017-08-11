@@ -12,22 +12,23 @@ import { TimeService } from '../../services/time.service';
   styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent implements OnInit {
-  players: FirebaseListObservable<object>;
+  players;
   bids;
+  users;
   constructor(private afDb: AngularFireDatabase,
   private afAuth: AngularFireAuth, public timeService: TimeService) {
    }
 
   ngOnInit() {
     var that = this;
-    this.players = this.afDb.list('/players')
-    this.afDb.list('bids', {
-      query: {
-        orderByChild: 'isWinningBid',
-        equalTo: 1
-      }
-    }).subscribe(snapshots => {
-      that.bids = snapshots;
+    this.players = this.afDb.list('/players').map(players => {
+      return players.map(player => {
+        player.winningBid = that.afDb.object('/bids/' + player.winningBidId)
+        return player;
+      })
+    });
+    this.afDb.list('/users').subscribe(snapshot => {
+        that.users = snapshot;
     });
   }
 
@@ -42,7 +43,13 @@ export class PlayerListComponent implements OnInit {
     if(!userId){
       return null;
     }
-    return this.afDb.object('/users/' + userId);
+    var user;
+    this.users.forEach(element => {
+      if(element.$key == userId){
+        user = element;
+      }
+    });
+    return user
   }
 
 }

@@ -14,7 +14,7 @@
   </thead>
   <tbody class="table-hover">
       <tr *ngFor="let player of players | async" 
-      [ngClass]="timeService.getTimeLeft((getWinningBid(player.winningBidId) | async)?.time, timeService.currentTimeInt) == this.timeService.bidWonString 
+      [ngClass]="timeService.getTimeLeft((player.winningBid | async)?.time, timeService.currentTimeInt) == this.timeService.bidWonString 
       ? 'bid-won' : ''">
       <td [routerLink]="['/player', player.$key]">
         {{ player.lastName }}
@@ -26,22 +26,22 @@
         {{ player.team }}
       </td>
       <td>
-        {{ (getWinningBidUser((getWinningBid(player.winningBidId) | async)?.userId) | async)?.name}} 
+        {{ getWinningBidUser((player.winningBid| async)?.userId)?.name}} 
       </td>
       <td>
-        {{ timeService.getTimeLeft((getWinningBid(player.winningBidId) | async)?.time, timeService.currentTimeInt) }}
+        {{ timeService.getTimeLeft((player.winningBid | async)?.time, timeService.currentTimeInt) }}
       </td>
       <td>
-        {{ timeService.getLocalTimeFromTimeStamp((getWinningBid(player.winningBidId) | async)?.time) }}
+        {{ timeService.getLocalTimeFromTimeStamp((player.winningBid | async)?.time) }}
       </td>
       <td>
-        {{ (getWinningBid(player.winningBidId) | async)?.salary }}
+        {{ (player.winningBid | async)?.salary }}
       </td>
       <td>
-        {{ (getWinningBid(player.winningBidId) | async)?.years }}
+        {{ (player.winningBid | async)?.years }}
       </td>
       <td>
-        {{ (getWinningBid(player.winningBidId) | async)?.totalValue }}
+        {{ (player.winningBid | async)?.totalValue }}
       </td>
      </tr>
   </tbody>
