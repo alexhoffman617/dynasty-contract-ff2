@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TimeService {
   currentTimeInt: number;
+  bidWonString = "Bid Won";
   constructor() { 
     setInterval(() => {
         this.currentTimeInt =  new Date().getTime();
@@ -14,8 +15,8 @@ export class TimeService {
     }
 
     public getLocalTimeFromTimeStamp = function (timestamp) {
-    if (timestamp === 'test') {
-        return timestamp
+    if (!timestamp) {
+        return "--"
     }
     return new Date(timestamp).toLocaleDateString() + ' ' + new Date(timestamp).toLocaleTimeString()
     }
@@ -31,7 +32,7 @@ export class TimeService {
         var minutes = this.formatTimeNumber(Math.floor((t / 1000 / 60) % 60));
         var hours = this.formatTimeNumber(Math.floor((t / (1000 * 60 * 60)) % 24));
         if (t < 0) {
-            return 'Bid Won';
+            return this.bidWonString;
         }
         return hours + ':' + minutes + ':' + seconds;       
     }

@@ -66,29 +66,37 @@ export class PlayerComponent implements OnInit {
 
   validateAndUpdateBid(bid){
     if(this.salarySerivce.winningPlayers >= 16){
-       this.snackBar.open("Bid Error: You already have a full team worth of current bids/ won players.", "Got it")
+       this.snackBar.open("Bid Error: You already have a full team worth of current bids/ won players.", "Got it");
        return;
     }
     var maxBid = this.salarySerivce.getMaxBid(this.loginService.userInDb.deadSalary);
     if(bid.salary > maxBid){
-       this.snackBar.open("Bid Error: Your bid salary of $" + bid.salary + " is greater than your max allowed bid of $" + maxBid + "." , "Got it")
+       this.snackBar.open("Bid Error: Your bid salary of $" + bid.salary + " is greater than your max allowed bid of $" + maxBid + "." , "Got it");
        return;
     }
     if(bid.years > 4 || bid.years < 1){
-       this.snackBar.open("Bid Error: All bids must be between 1 to 4 years." , "Got it")
+       this.snackBar.open("Bid Error: All bids must be between 1 to 4 years." , "Got it");
        return;
     }
     if(bid.salary < 1){
-       this.snackBar.open("Bid Error: All bids must be at least $1." , "Got it")
+       this.snackBar.open("Bid Error: All bids must be at least $1." , "Got it");
        return;
     }
+    if(bid.salary < 10 && bid.years > 3){
+      this.snackBar.open("Bid Error: Bids with salaries of less than $10 can be for a max of 3 years.", "Got it");
+      return;
+    }
     if(this.currentMaxBid){
+      if(this.timeService.getTimeLeft(this.currentMaxBid.time, this.timeService.currentTimeInt) == this.timeService.bidWonString){
+        this.snackBar.open("Bid Error: This player has already been won.", "Got it")
+        return;
+      }
       if(this.currentMaxBid.totalValue >= bid.totalValue){
-        this.snackBar.open("Bid Error: There is already a bid with the same or higher total value.", "Got it")
+        this.snackBar.open("Bid Error: There is already a bid with the same or higher total value.", "Got it");
         return;
       }
       if(this.currentMaxBid.userId == bid.userId){
-        this.snackBar.open("Bid Error: You are already the top bidder on this player.", "Got it")
+        this.snackBar.open("Bid Error: You are already the top bidder on this player.", "Got it");
         return;
       }
       this.bids.update(this.currentMaxBid.$key, { isWinningBid: false })

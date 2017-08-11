@@ -1,5 +1,5 @@
 <h2 >
-  {{ loginService.userInDb != null ? loginService.userInDb?.name + "'s Team": "Invalid Team Link" }}
+  {{ user != null ? user?.name + "'s Team": "Invalid Team Link" }}
   </h2>
   <div>
     Total Salary: {{ salaryService.totalSalary }}
@@ -23,7 +23,9 @@
       </tr>
     </thead>
     <tbody class="table-hover" *ngFor="let bid of userBids | async">
-        <tr *ngIf="bid.isWinningBid">
+        <tr *ngIf="bid.isWinningBid"  
+        [ngClass]="timeService.getTimeLeft(bid.time, timeService.currentTimeInt) == timeService.bidWonString 
+        ? 'bid-won' : ''">
         <td [routerLink]="['/player', bid.playerId]">
           {{ (bid.playerInfo | async)?.lastName }}
         </td>

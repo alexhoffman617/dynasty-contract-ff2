@@ -13,7 +13,9 @@
     </tr>
   </thead>
   <tbody class="table-hover">
-      <tr *ngFor="let player of players | async">
+      <tr *ngFor="let player of players | async" 
+      [ngClass]="timeService.getTimeLeft((getWinningBid(player.winningBidId) | async)?.time, timeService.currentTimeInt) == this.timeService.bidWonString 
+      ? 'bid-won' : ''">
       <td [routerLink]="['/player', player.$key]">
         {{ player.lastName }}
       </td>

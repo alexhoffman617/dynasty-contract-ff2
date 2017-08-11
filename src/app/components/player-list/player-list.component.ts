@@ -33,18 +33,14 @@ export class PlayerListComponent implements OnInit {
 
   getWinningBid(winningBidId){
     if(!winningBidId){
-      var x = new FirebaseObjectObservable
-      x.set({"salary": "--", "years": "--", "totalValue":"--", "userId": null})
-      return x;
+      return null
     }
     return this.afDb.object('/bids/' + winningBidId);
   }
 
   getWinningBidUser(userId){
     if(!userId){
-      var x = new FirebaseObjectObservable
-      x.set( { "name": "--"});
-      return x;
+      return null;
     }
     return this.afDb.object('/users/' + userId);
   }
