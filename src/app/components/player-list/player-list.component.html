@@ -2,11 +2,11 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Position</th>
-      <th>Team</th>
+      <th *ngIf="!mobileDetector.isMobile">Position</th>
+      <th *ngIf="!mobileDetector.isMobile">Team</th>
       <th>Owner</th>
       <th>Time Left</th>
-      <th>Bid Time</th>
+      <th *ngIf="!mobileDetector.isMobile">Bid Time</th>
       <th>Salary</th>
       <th>Years</th>
       <th>Total Value</th>   
@@ -19,10 +19,10 @@
       <td [routerLink]="['/player', player.$key]">
         {{ player.lastName }}
       </td>
-      <td>
+      <td *ngIf="!mobileDetector.isMobile">
         {{ player.position }}
       </td>
-      <td>
+      <td *ngIf="!mobileDetector.isMobile">
         {{ player.team }}
       </td>
       <td>
@@ -31,7 +31,7 @@
       <td>
         {{ timeService.getTimeLeft((player.winningBid | async)?.time, timeService.currentTimeInt) }}
       </td>
-      <td>
+      <td *ngIf="!mobileDetector.isMobile">
         {{ timeService.getLocalTimeFromTimeStamp((player.winningBid | async)?.time) }}
       </td>
       <td>

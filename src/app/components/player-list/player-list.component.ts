@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable  } from 'angularfire2/database';
 import { Bid } from '../../models/bid'
 import { TimeService } from '../../services/time.service';
+import { MobileDetectorService } from '../../services/mobile-detector.service';
 
 
 
@@ -16,7 +17,9 @@ export class PlayerListComponent implements OnInit {
   bids;
   users;
   constructor(private afDb: AngularFireDatabase,
-  private afAuth: AngularFireAuth, public timeService: TimeService) {
+  private afAuth: AngularFireAuth,
+  public timeService: TimeService,
+  public mobileDetector: MobileDetectorService) {
    }
 
   ngOnInit() {

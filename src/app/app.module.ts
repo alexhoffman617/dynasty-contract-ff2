@@ -20,6 +20,8 @@ import { PlayerListComponent } from './components/player-list/player-list.compon
 import { TimeService } from './services/time.service';
 import { LoginService } from './services/login.service';
 import { SalaryService } from './services/salary.service';
+import { MobileDetectorService } from './services/mobile-detector.service';
+
 
 
 
@@ -65,7 +67,8 @@ export const firebaseConfig = {
   bootstrap: [ AppComponent ],
   providers:[ TimeService,
   LoginService,
-  SalaryService]
+  SalaryService,
+  MobileDetectorService]
 })
 export class AppModule {}
 

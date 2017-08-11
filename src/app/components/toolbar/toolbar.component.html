@@ -1,5 +1,5 @@
-<md-toolbar color="primary" class="mat-elevation-z4">
-  <h1><a href='' id="header-primary-white">Dynasty Fantasy Football</a></h1>
+<md-toolbar *ngIf="!mobileDetector.isMobile" color="primary" class="mat-elevation-z4">
+  <h1><a href='' id="header-primary-white" >Dynasty Fantasy Football</a></h1>
   <button class="header-button" [routerLink]="['/playerList']" md-icon-button>
     Players
   </button>
@@ -13,4 +13,21 @@
   <button md-button *ngIf="!loginService.user" class="header-button" (click)="loginService.login()">
     LOGIN
   </button>
+</md-toolbar>
+
+<md-toolbar *ngIf="mobileDetector.isMobile" color="primary" class="mat-elevation-z4">
+  <md-icon [routerLink]="['/']" id="header-primary-white">home</md-icon>
+  <md-icon class="header-icon" [routerLink]="['/playerList']" md-icon-button>
+    person
+  </md-icon>
+  <md-icon *ngIf="loginService.user" class="header-icon" [routerLink]="['/team', loginService.user.uid]" md-icon-button>
+    assignment
+  </md-icon>
+  <span class="spacer"></span>
+  <button *ngIf="loginService.user" class="header-icon" md-icon-button (click)="loginService.logout()">
+    <img class="mat-card-avatar" id="custom-avatar" src="{{loginService.user.photoURL}}">
+  </button>
+  <md-icon md-button *ngIf="!loginService.user" class="header-icon" (click)="loginService.login()">
+    fingerprint
+  </md-icon>
 </md-toolbar>

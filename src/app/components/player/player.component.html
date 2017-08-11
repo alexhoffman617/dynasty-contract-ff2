@@ -10,10 +10,12 @@
 </div>
 <div>
   <md-input-container>
-    <input mdInput placeholder="Salary" [(ngModel)]="newBidSalary" name="newBidSalary"/>
+    <input mdInput type="number" placeholder="Salary" [(ngModel)]="newBidSalary" name="newBidSalary"
+    type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
   </md-input-container>
   <md-input-container>
-    <input mdInput placeholder="Years" [(ngModel)]="newBidYears" name="newBidYears"/>
+    <input mdInput placeholder="Years" [(ngModel)]="newBidYears" name="newBidYears"
+    type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
   </md-input-container>
   <md-input-container>
     <input mdInput placeholder="TotalValue" disabled="true"

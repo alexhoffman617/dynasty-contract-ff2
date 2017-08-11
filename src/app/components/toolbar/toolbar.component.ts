@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import { MobileDetectorService } from '../../services/mobile-detector.service'; 
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -17,6 +18,7 @@ export class ToolbarComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router,
+    private mobileDetector: MobileDetectorService,
     public loginService: LoginService) { }
 
   ngOnInit() {
