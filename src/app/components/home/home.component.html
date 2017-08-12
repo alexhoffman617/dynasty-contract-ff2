@@ -1,3 +1,30 @@
-<div>
-
-</div>
+<table class="md-table">
+  <thead>
+    <tr>
+      <th>Team</th> 
+      <th>2016</th>    
+      <th>2015</th>     
+      <th>2014</th>     
+      <th>Franchise Standing</th>
+    </tr>
+  </thead>
+  <tbody class="table-hover">
+      <tr *ngFor="let user of users | sort: 'sixteenFinish'">
+      <td [routerLink]="['/team', user.$key]">
+        {{ user.name }}
+      </td>
+      <td>
+          {{ user.sixteenFinish}}
+      </td>      
+        <td>
+          {{ user.fifteenFinish}}
+      </td>      
+        <td>
+          {{ user.fourteenFinish}}
+      </td>
+      <td>
+          {{ calculateFranchiseStanding(user) }}
+      </td>
+    </tr>
+  </tbody>
+</table>

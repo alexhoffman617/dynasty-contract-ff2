@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-
+import { AngularFireDatabase } from 'angularfire2/database';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,18 +7,30 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 
 export class HomeComponent implements OnInit {
-  user: object;
-  constructor(private afAuth: AngularFireAuth){
-    this.afAuth.authState.subscribe(res =>{
-    if(res && res.uid){
-      this.user =  res;
-    } else {
-      this.user =  null;
-    }})
+  users;
+
+  constructor(private afDb: AngularFireDatabase){
   }
+
   ngOnInit() {
+    var that = this;
+    this.afDb.list('/users').subscribe(snapshot => {
+      that.users = snapshot;
+    });
   }
-  click(){
-    var x = 1;
+
+  calculateFranchiseStanding(user){
+    var total = 0;
+    for(var propt in user){
+      if(propt.indexOf("Finish") > -1 && propt != 'fourteenFinish'){
+        if(user[propt] == 1){
+          total += 0;
+        }
+        else{
+          total += user[propt];
+        }
+      }
+    }
+    return total;
   }
 }

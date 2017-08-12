@@ -22,7 +22,7 @@ import { LoginService } from './services/login.service';
 import { SalaryService } from './services/salary.service';
 import { MobileDetectorService } from './services/mobile-detector.service';
 
-
+import { SortPipe } from './services/sort-pipe'
 
 
 
@@ -63,7 +63,8 @@ export const firebaseConfig = {
   TeamComponent,
   ToolbarComponent,
   PlayerComponent,
-  PlayerListComponent ],
+  PlayerListComponent,
+  SortPipe ],
   bootstrap: [ AppComponent ],
   providers:[ TimeService,
   LoginService,
