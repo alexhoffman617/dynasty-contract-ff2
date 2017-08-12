@@ -5,11 +5,11 @@ export class Bid {
   years: number;
   totalValue: number;
   userId: string;
-  time: object;
+  time;
   $key: string;
 
   constructor(isWinningBid: boolean, playerId: string, salary: number,
-                years: number, totalValue: number, userId: string, time: object) {
+                years: number, totalValue: number, userId: string, time) {
     this.isWinningBid = isWinningBid;
     this.playerId = playerId;
     this.salary = salary;

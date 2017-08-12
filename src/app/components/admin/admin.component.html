@@ -1,0 +1,28 @@
+<div>
+  <md-select [(ngModel)]="bidUser" placeholder="User" name="bidUser">
+    <md-option *ngFor="let user of users" [value]="user">
+      {{ user.name }}
+    </md-option>
+  </md-select>  
+  <md-select [(ngModel)]="bidPlayer" placeholder="Player" name="bidPlayer">
+    <md-option *ngFor="let player of players " [value]="player">
+      {{ player.firstName }} {{ player.lastName }}
+    </md-option>
+  </md-select>  
+  <md-input-container>
+    <input mdInput type="number" placeholder="Salary" [(ngModel)]="bidSalary" name="bidSalary"
+    type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="Years" [(ngModel)]="bidYears" name="bidYears"
+    type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57"/>
+  </md-input-container>
+  <md-input-container>
+    <input mdInput placeholder="TotalValue" disabled="true"
+    [value]="getBidTotalValue()"/>
+  </md-input-container>
+  <button type="submit" md-raised-button color="primary"  
+    (click)="submitBid(newBidSalary, newBidYears)">
+    SUBMIT BID
+  </button>
+</div>

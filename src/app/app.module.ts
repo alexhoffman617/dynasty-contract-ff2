@@ -16,13 +16,14 @@ import { MaterialModule } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk';
 import { PlayerComponent } from './components/player/player.component';
 import { PlayerListComponent } from './components/player-list/player-list.component';
+import { AdminComponent } from './components/admin/admin.component'
 
 import { TimeService } from './services/time.service';
 import { LoginService } from './services/login.service';
 import { SalaryService } from './services/salary.service';
 import { MobileDetectorService } from './services/mobile-detector.service';
 
-import { SortPipe } from './services/sort-pipe'
+import { SortPipe } from './services/sort-pipe';
 
 
 
@@ -31,8 +32,8 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'team/:userId', component: TeamComponent},
   {path: 'player/:playerId', component: PlayerComponent},
-  {path: 'playerList', component: PlayerListComponent}
-
+  {path: 'playerList', component: PlayerListComponent},
+  {path: 'admin', component: AdminComponent},
 ];
 
 export const firebaseConfig = {
@@ -64,7 +65,8 @@ export const firebaseConfig = {
   ToolbarComponent,
   PlayerComponent,
   PlayerListComponent,
-  SortPipe ],
+  AdminComponent,
+  SortPipe],
   bootstrap: [ AppComponent ],
   providers:[ TimeService,
   LoginService,

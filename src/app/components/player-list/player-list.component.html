@@ -44,7 +44,7 @@
       <td *ngIf="!mobileDetector.isMobile">
         {{ player.team }}
       </td>
-      <td>
+      <td [routerLink]="['/team', (player.winningBid | async)?.userId]">
         {{ getWinningBidUser((player.winningBid| async)?.userId)?.name}} 
       </td>
       <td>
@@ -54,13 +54,13 @@
         {{ timeService.getLocalTimeFromTimeStamp((player.winningBid | async)?.time) }}
       </td>
       <td>
-        {{ (player.winningBid | async)?.salary }}
+        ${{ (player.winningBid | async)?.salary }}
       </td>
       <td>
         {{ (player.winningBid | async)?.years }}
       </td>
       <td>
-        {{ (player.winningBid | async)?.totalValue }}
+        ${{ (player.winningBid | async)?.totalValue }}
       </td>
      </tr>
     </ng-container>

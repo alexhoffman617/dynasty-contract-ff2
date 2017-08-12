@@ -61,7 +61,6 @@ export class PlayerComponent implements OnInit {
     var bid = new Bid(true, this.playerId, salary, years, this.getBidTotalValue(salary, years),
      this.loginService.userInDb.$key, firebase.database.ServerValue.TIMESTAMP);
     this.validateAndUpdateBid(bid);
-
   }
 
   validateAndUpdateBid(bid){
