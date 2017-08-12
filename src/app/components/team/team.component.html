@@ -27,7 +27,7 @@
         [ngClass]="timeService.getTimeLeft(bid.time, timeService.currentTimeInt) == timeService.bidWonString 
         ? 'bid-won' : ''">
         <td [routerLink]="['/player', bid.playerId]">
-          {{ (bid.playerInfo | async)?.lastName }}
+          {{(bid.playerInfo | async)?.firstName }} {{ (bid.playerInfo | async)?.lastName }}
         </td>
         <td>
           {{ (bid.playerInfo | async)?.position }}

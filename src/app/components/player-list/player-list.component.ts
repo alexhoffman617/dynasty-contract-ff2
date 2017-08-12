@@ -16,6 +16,13 @@ export class PlayerListComponent implements OnInit {
   players;
   bids;
   users;
+
+  positions = ["QB", "RB", "WR", "TE", "DST"];
+  selectedPosition: string;
+  bidStatuses = ["Bid Won", "In Progress", "No Bid"];
+  bidStatus: string;
+  nameSearch: string;
+
   constructor(private afDb: AngularFireDatabase,
   private afAuth: AngularFireAuth,
   public timeService: TimeService,
@@ -53,6 +60,24 @@ export class PlayerListComponent implements OnInit {
       }
     });
     return user
+  }
+
+  isFilteredOut(player, winningBid){
+    if(player.position != this.selectedPosition && this.selectedPosition){
+      return true;
+    }
+    var timeLeft = this.timeService.getTimeLeft(winningBid.time, this.timeService.currentTimeInt)
+    if(this.bidStatus
+        && timeLeft != this.bidStatus 
+        && !(this.bidStatus == this.bidStatuses[2] && timeLeft == "--")
+        && !(this.bidStatus == this.bidStatuses[1] && timeLeft.includes(":"))){
+      return true;
+    }
+    var playerName = player.firstName + ' ' + player.lastName;
+    if(this.nameSearch && !playerName.includes(this.nameSearch)){
+      return true;
+    }
+    return false;
   }
 
 }

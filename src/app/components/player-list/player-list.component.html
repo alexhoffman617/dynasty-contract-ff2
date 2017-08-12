@@ -1,3 +1,20 @@
+<div>
+  <md-input-container>
+    <input mdInput placeholder="Name Search" [(ngModel)]="nameSearch" />
+  </md-input-container>
+  <md-select [(ngModel)]="selectedPosition" placeholder="Position">
+    <md-option></md-option>
+    <md-option *ngFor="let position of positions" [value]="position">
+      {{ position }}
+    </md-option>
+  </md-select>
+  <md-select [(ngModel)]="bidStatus" placeholder="Bid State">
+    <md-option></md-option>
+    <md-option *ngFor="let status of bidStatuses" [value]="status">
+      {{ status }}
+    </md-option>
+  </md-select>
+</div>
 <table class="md-table">
   <thead>
     <tr>
@@ -13,11 +30,13 @@
     </tr>
   </thead>
   <tbody class="table-hover">
-      <tr *ngFor="let player of players | async" 
+    <ng-container *ngFor="let player of players | async">
+      <tr  
       [ngClass]="timeService.getTimeLeft((player.winningBid | async)?.time, timeService.currentTimeInt) == this.timeService.bidWonString 
-      ? 'bid-won' : ''">
+      ? 'bid-won' : ''"
+      *ngIf="!isFilteredOut(player, (player.winningBid | async))">
       <td [routerLink]="['/player', player.$key]">
-        {{ player.lastName }}
+        {{ player.firstName }} {{ player.lastName }}
       </td>
       <td *ngIf="!mobileDetector.isMobile">
         {{ player.position }}
@@ -44,5 +63,6 @@
         {{ (player.winningBid | async)?.totalValue }}
       </td>
      </tr>
+    </ng-container>
   </tbody>
 </table>

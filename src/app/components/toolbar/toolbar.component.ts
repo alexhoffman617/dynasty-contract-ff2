@@ -18,7 +18,7 @@ export class ToolbarComponent implements OnInit {
 
   constructor(private afAuth: AngularFireAuth,
     private router: Router,
-    private mobileDetector: MobileDetectorService,
+    public mobileDetector: MobileDetectorService,
     public loginService: LoginService) { }
 
   ngOnInit() {

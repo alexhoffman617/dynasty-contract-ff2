@@ -1,13 +1,20 @@
 <h2>
   {{(player | async) != null ? 
-  (player | async).lastName + ", " + (player | async).firstName 
+  (player | async).firstName + ' ' + (player | async).lastName 
   : "Invalid Player Page"}}
 </h2>
-<div>
+<h3>
+  {{(player | async) != null ? 
+  'position: ' + (player | async).position + 
+  ' | team: ' + (player | async).team +
+  ' | bye week: ' + (player | async).byeWeek
+  : "--"}}
+</h3>
+<h3>
   Time Left: {{ currentMaxBid !=null ? 
   timeService.getTimeLeft(currentMaxBid.time, timeService.currentTimeInt) :
   "--"}}
-</div>
+</h3>
 <div>
   <md-input-container>
     <input mdInput type="number" placeholder="Salary" [(ngModel)]="newBidSalary" name="newBidSalary"
