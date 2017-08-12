@@ -1,15 +1,15 @@
 <h2 >
   {{ user != null ? user?.name + "'s Team": "Invalid Team Link" }}
   </h2>
-  <div>
-    Total Salary: {{ salaryService.totalSalary }}
-  </div>
-  <div>
+  <h3>
+    Total Salary: ${{ salaryService.totalSalary }}
+  </h3>
+  <h3>
      Current Player Count: {{ salaryService.winningPlayers }}
-  </div>
-  <div>
-    Current Max Bid: {{ salaryService.getMaxBid(loginService.userInDb?.deadSalary) }}
-  </div>
+  </h3>
+  <h3>
+    Current Max Bid: ${{ salaryService.getMaxBid(loginService.userInDb?.deadSalary) }}
+  </h3>
   <table class="md-table">
     <thead>
       <tr>
