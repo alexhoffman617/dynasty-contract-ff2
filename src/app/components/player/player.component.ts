@@ -34,6 +34,7 @@ export class PlayerComponent implements OnInit {
 
   ngOnInit() {
     var that = this;
+    this.salarySerivce.setServiceForUser(this.loginService.userInDb.$key)
     this.route.params.subscribe(params => this.playerId = params['playerId']);
     this.player = this.afDb.object('/players/'+ this.playerId);
     this.bids = this.afDb.list('bids', {
@@ -64,6 +65,10 @@ export class PlayerComponent implements OnInit {
   }
 
   validateAndUpdateBid(bid){
+    if(!bid.salary || !bid.years){
+       this.snackBar.open("Bid Error: Sigh, dont't be like Old Man Bretton. Include a salary and number of years.", "Stupid Bretton");
+       return;
+    }
     if(this.salarySerivce.winningPlayers >= 16){
        this.snackBar.open("Bid Error: You already have a full team worth of current bids/ won players.", "Got it");
        return;

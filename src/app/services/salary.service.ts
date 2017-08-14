@@ -36,6 +36,6 @@ export class SalaryService {
     getMaxBid(deadSalary){
         var otherPlayersLeft = 16-1-this.winningPlayers;
         var salaryAfterDead = 240-deadSalary;
-        return salaryAfterDead - otherPlayersLeft;
+        return salaryAfterDead - otherPlayersLeft - this.totalSalary;
     }
 }
